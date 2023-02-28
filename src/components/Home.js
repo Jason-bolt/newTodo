@@ -3,7 +3,7 @@ import Button from "./_Button";
 
 const Home = () => {
   return (
-    <div className="flex flex-col-reverse justify-center items-center mt-10 md:flex-row md:justify-between md:w-800px">
+    <div className="flex flex-col-reverse justify-center items-center md:flex-row md:justify-between md:w-800px">
       <div className="bottom w-333px flex-col">
         <h1 className="text-40px font-semibold leading-48.41px">
           Manage your tasks effectively
