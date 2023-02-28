@@ -5,13 +5,13 @@ module.exports = {
     fontFamily: {
       sans: "Inter",
     },
-    colors: {
-      gray: "#F4F4F4",
-      white: "#FFFFFF",
-      black: "#000000",
-      violet: "#5222D0",
-    },
     extend: {
+      colors: {
+        gray: "#F4F4F4",
+        white: "#FFFFFF",
+        black: "#000000",
+        violet: "#5222D0",
+      },
       fontSize: {
         "40px": "40px",
       },
