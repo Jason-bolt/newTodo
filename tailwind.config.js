@@ -1,5 +1,7 @@
+const withMT = require("@material-tailwind/react/utils/withMT");
+
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+module.exports = withMT({
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     fontFamily: {
@@ -8,12 +10,15 @@ module.exports = {
     extend: {
       colors: {
         gray: "#F4F4F4",
+        arrow: "#545454",
         checkGray: "#D9D9D9",
+        checked: "#5F8BFB",
         white: "#FFFFFF",
         black: "#000000",
         violet: "#5222D0",
         delete: "#DD6B6B",
         edit: "#5F8BFB",
+        prioritybg: "#EFEFEF",
       },
       fontSize: {
         "40px": "40px",
@@ -51,4 +56,4 @@ module.exports = {
     },
   },
   plugins: [require("@tailwindcss/forms")],
-};
+});
