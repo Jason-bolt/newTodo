@@ -4,16 +4,9 @@ import { IoMdArrowDropup } from "react-icons/io";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { useEffect, useState } from "react";
 
-const Task = ({ task, priority, dateTime }) => {
+const Task = ({ task, toggleCompleted }) => {
   const [dateCreated, setDateCreated] = useState("");
-  const [completed, setCompleted] = useState("");
-  const [checked, setChecked] = useState(false);
-  const [priorityCount, setPriorityCount] = useState(priority);
-
-  function toggleCompleted() {
-    setChecked(!checked);
-    setCompleted(checked ? "line-through" : "");
-  }
+  const [priorityCount, setPriorityCount] = useState(task.priority);
 
   function increasePriority() {
     setPriorityCount(priorityCount + 1);
@@ -28,12 +21,12 @@ const Task = ({ task, priority, dateTime }) => {
   useEffect(() => {
     const currentDate = new Date();
     const seconds =
-      (currentDate.getTime() - new Date(dateTime).getTime()) / 1000;
+      (currentDate.getTime() - new Date(task.date).getTime()) / 1000;
     if (seconds < 60) {
       setDateCreated(`${seconds} seconds ago`);
     } else {
-      let hour = new Date(dateTime).getHours();
-      let minutes = new Date(dateTime).getMinutes();
+      let hour = new Date(task.date).getHours();
+      let minutes = new Date(task.date).getMinutes();
       let zone = "";
       if (hour >= 12) {
         zone = "pm";
@@ -43,6 +36,7 @@ const Task = ({ task, priority, dateTime }) => {
       }
       setDateCreated(`${hour}:${minutes} ${zone}`);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -53,11 +47,19 @@ const Task = ({ task, priority, dateTime }) => {
           type="checkbox"
           className="rounded border-none bg-checkGray mr-4 text-checked focus:ring-transparent"
           name="completed"
-          onChange={() => toggleCompleted()}
+          onChange={() => toggleCompleted(task.id)}
         />
         {/* Task and date */}
         <div className="flex flex-col justify-center items-start space-y-1 w-403.33px">
-          <p className={`text-base leading-19.36px ${completed}`}>{task}</p>
+          <p
+            className={
+              `text-base leading-19.36px ` + (task.isCompleted === true
+                ? "line-through"
+                : "")
+            }
+          >
+            {task.task}
+          </p>
           <p className="text-xs opacity-50 leading-19.2px">
             Added {dateCreated}
           </p>
