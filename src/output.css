@@ -834,6 +834,10 @@ select {
   width: 1rem;
 }
 
+.cursor-pointer {
+  cursor: pointer;
+}
+
 .flex-row {
   flex-direction: row;
 }
@@ -1046,6 +1050,10 @@ select {
   color: rgb(95 139 251 / var(--tw-text-opacity));
 }
 
+.line-through {
+  text-decoration-line: line-through;
+}
+
 .accent-red-600 {
   accent-color: #e53935;
 }
@@ -1056,6 +1064,10 @@ select {
 
 .opacity-50 {
   opacity: 0.5;
+}
+
+.opacity-40 {
+  opacity: 0.4;
 }
 
 .shadow-sm {
@@ -1085,6 +1097,10 @@ select {
 .checked\:bg-red-600:checked {
   --tw-bg-opacity: 1;
   background-color: rgb(229 57 53 / var(--tw-bg-opacity));
+}
+
+.hover\:cursor-pointer:hover {
+  cursor: pointer;
 }
 
 .focus\:bg-red-600:focus {
