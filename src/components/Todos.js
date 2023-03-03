@@ -3,6 +3,8 @@ import Tasks from "./Tasks";
 import Form from "./_Form";
 
 const Todos = () => {
+  const [nextId, setNextId] = useState(3)
+
   const [tasks, setTasks] = useState([
     {
       id: 1,
@@ -20,6 +22,19 @@ const Todos = () => {
     },
   ]);
 
+  function createTask(task) {
+
+    const newTask = {
+      id: nextId,
+      task,
+      date: new Date(),
+      priority: 0,
+      isCompleted: false
+    }
+    setTasks([...tasks, newTask])
+    setNextId(nextId + 1)
+  }
+  
   function increasePriority(id) {
     const currentTask = tasks.map((task) => {
       if (task.id === id) {
@@ -31,7 +46,7 @@ const Todos = () => {
     });
     setTasks(currentTask);
   }
-
+  
   function decreasePriority(id, priority) {
     if (priority === 0) {
       return;
@@ -62,7 +77,7 @@ const Todos = () => {
 
   return (
     <>
-      <Form />
+      <Form createTask={createTask} />
       <Tasks
         tasks={tasks}
         toggleCompleted={toggleCompleted}
