@@ -6,6 +6,7 @@ const Tasks = ({
   toggleCompleted,
   increasePriority,
   decreasePriority,
+  deleteTask
 }) => {
   const [formattedTasks, setFormattedTasks] = useState(tasks);
 
@@ -34,6 +35,7 @@ const Tasks = ({
             toggleCompleted={toggleCompleted}
             increasePriority={increasePriority}
             decreasePriority={decreasePriority}
+            deleteTask={deleteTask}
           />
         ))}
       </div>

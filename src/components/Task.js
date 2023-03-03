@@ -9,6 +9,7 @@ const Task = ({
   toggleCompleted,
   increasePriority,
   decreasePriority,
+  deleteTask
 }) => {
   const [dateCreated, setDateCreated] = useState("");
 
@@ -17,7 +18,8 @@ const Task = ({
     const seconds =
       (currentDate.getTime() - new Date(task.date).getTime()) / 1000;
     if (seconds < 60) {
-      setDateCreated(`${seconds} seconds ago`);
+      const roundedSeconds = Math.round((seconds + Number.EPSILON) * 10) / 10
+      setDateCreated(`${roundedSeconds} seconds ago`);
     } else {
       let hour = new Date(task.date).getHours();
       let minutes = new Date(task.date).getMinutes();
@@ -62,7 +64,7 @@ const Task = ({
         {/* Edit button */}
         <BiEdit className="btn w-5 h-5 text-edit mr-23.17px" />
         {/* Delete button */}
-        <RiDeleteBin2Line className="text-delete w-5 h-5" />
+        <RiDeleteBin2Line className="text-delete w-5 h-5 hover:cursor-pointer" onClick={() => deleteTask(task.id)} />
         {/* Priority count */}
         <div className="bg-prioritybg h-11 w-12 flex justify-center items-center rounded-lg ml-7">
           {task.priority}
