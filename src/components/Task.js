@@ -4,19 +4,13 @@ import { IoMdArrowDropup } from "react-icons/io";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { useEffect, useState } from "react";
 
-const Task = ({ task, toggleCompleted }) => {
+const Task = ({
+  task,
+  toggleCompleted,
+  increasePriority,
+  decreasePriority,
+}) => {
   const [dateCreated, setDateCreated] = useState("");
-  const [priorityCount, setPriorityCount] = useState(task.priority);
-
-  function increasePriority() {
-    setPriorityCount(priorityCount + 1);
-  }
-
-  function decreasePriority() {
-    if (priorityCount > 0) {
-      setPriorityCount(priorityCount - 1);
-    }
-  }
 
   useEffect(() => {
     const currentDate = new Date();
@@ -39,6 +33,8 @@ const Task = ({ task, toggleCompleted }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {});
+
   return (
     <div className="w-full h-72px bg-white pl-7 pr-2 py-3 rounded-lg">
       {/* content */}
@@ -53,9 +49,8 @@ const Task = ({ task, toggleCompleted }) => {
         <div className="flex flex-col justify-center items-start space-y-1 w-403.33px">
           <p
             className={
-              `text-base leading-19.36px ` + (task.isCompleted === true
-                ? "line-through"
-                : "")
+              `text-base leading-19.36px ` +
+              (task.isCompleted === true ? "line-through" : "")
             }
           >
             {task.task}
@@ -70,19 +65,19 @@ const Task = ({ task, toggleCompleted }) => {
         <RiDeleteBin2Line className="text-delete w-5 h-5" />
         {/* Priority count */}
         <div className="bg-prioritybg h-11 w-12 flex justify-center items-center rounded-lg ml-7">
-          {priorityCount}
+          {task.priority}
         </div>
         {/* Arrows */}
         <div className="flex flex-col justify-center items-center ml-1">
           {/* Arrow up */}
           <IoMdArrowDropup
             className="text-2xl text-arrow cursor-pointer"
-            onClick={() => increasePriority()}
+            onClick={() => increasePriority(task.id)}
           />
           {/* Down up */}
           <IoMdArrowDropdown
             className="text-2xl text-arrow cursor-pointer"
-            onClick={() => decreasePriority()}
+            onClick={() => decreasePriority(task.id, task.priority)}
           />
         </div>
       </div>

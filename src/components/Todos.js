@@ -20,14 +20,41 @@ const Todos = () => {
     },
   ]);
 
+  function increasePriority(id) {
+    const currentTask = tasks.map((task) => {
+      if (task.id === id) {
+        const prePriority = task.priority;
+        return { ...task, priority: prePriority + 1 };
+      } else {
+        return task;
+      }
+    });
+    setTasks(currentTask);
+  }
+
+  function decreasePriority(id, priority) {
+    if (priority === 0) {
+      return;
+    }
+    const currentTask = tasks.map((task) => {
+      if (task.id === id) {
+        const prePriority = task.priority;
+        return { ...task, priority: prePriority - 1 };
+      } else {
+        return task;
+      }
+    });
+    setTasks(currentTask);
+  }
+
   function toggleCompleted(id) {
     // eslint-disable-next-line array-callback-return
     const currentTask = tasks.map((task) => {
       if (task.id === id) {
         const status = task.isCompleted;
         return { ...task, isCompleted: !status };
-      }else{
-        return task
+      } else {
+        return task;
       }
     });
     setTasks(currentTask);
@@ -36,7 +63,12 @@ const Todos = () => {
   return (
     <>
       <Form />
-      <Tasks tasks={tasks} toggleCompleted={toggleCompleted} />
+      <Tasks
+        tasks={tasks}
+        toggleCompleted={toggleCompleted}
+        increasePriority={increasePriority}
+        decreasePriority={decreasePriority}
+      />
     </>
   );
 };
