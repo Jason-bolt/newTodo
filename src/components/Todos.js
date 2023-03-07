@@ -33,6 +33,7 @@ const Todos = ({
         decreasePriority={decreasePriority}
         deleteTask={deleteTask}
         getTaskData={getTaskData}
+        editingId={editingId}
       />
     </>
   );

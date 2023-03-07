@@ -7,7 +7,8 @@ const Tasks = ({
   increasePriority,
   decreasePriority,
   deleteTask,
-  getTaskData
+  getTaskData,
+  editingId
 }) => {
   const [formattedTasks, setFormattedTasks] = useState(tasks);
 
@@ -38,6 +39,7 @@ const Tasks = ({
             decreasePriority={decreasePriority}
             deleteTask={deleteTask}
             getTaskData={getTaskData}
+            editingId={editingId}
           />
         ))}
       </div>

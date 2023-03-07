@@ -12,9 +12,15 @@ const Task = ({
   decreasePriority,
   deleteTask,
   getTaskData,
+  editingId
 }) => {
   const [dateCreated, setDateCreated] = useState("");
   const [showModal, setShowModal] = useState(false);
+  const [editStyle, setEditStyle] = useState("text-edit")
+
+  useEffect(() => {
+    setEditStyle(editingId === task.id ? "text-green-500" : "text-edit")
+  }, [editingId])
 
   useEffect(() => {
     const currentDate = new Date();
@@ -65,7 +71,7 @@ const Task = ({
           </div>
           {/* Edit button */}
           <BiEdit
-            className="btn w-5 h-5 text-edit mr-23.17px cursor-pointer"
+            className={`btn w-5 h-5 ${editStyle} mr-23.17px cursor-pointer`}
             onClick={() => {
               getTaskData(task.id);
               // setShowModal(true);

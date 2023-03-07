@@ -18,20 +18,20 @@ const _Form = ({ createTask, taskData, editTask, editingId, setEditingId }) => {
   }
 
   function submit(task) {
-    if (!task) {
+    if (!task || task.trim() === '') {
       alert("Task can not be empty!");
     } else {
-      createTask(task);
+      createTask(task.trim());
       setTask("");
     }
   }
-  
+
   function edit(task) {
-    if (!task) {
+    if (!task || task.trim() === '') {
       alert("Task can not be empty!");
     } else {
-      editTask(editingId, task);
-      setEditingId(null)
+      editTask(editingId, task.trim());
+      setEditingId(null);
       setTask("");
     }
   }
@@ -45,7 +45,6 @@ const _Form = ({ createTask, taskData, editTask, editingId, setEditingId }) => {
             id="search"
             className="block h-14 px-26px pt-19px pb-18px w-full placeholder:text-black placeholder:opacity-40 rounded border-none focus:outline-none focus:border-transparent focus:ring-transparent"
             placeholder="Add task..."
-            required
             value={task}
             onChange={updateTask}
           />
@@ -53,9 +52,7 @@ const _Form = ({ createTask, taskData, editTask, editingId, setEditingId }) => {
           <button
             type="submit"
             className="text-white text-base rounded bg-violet px-6 py-2 hover:bg-violet-800"
-            onClick={() =>
-              editingId ? edit(task) : submit(task)
-            }
+            onClick={() => (editingId ? edit(task) : submit(task))}
           >
             Save
           </button>
