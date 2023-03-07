@@ -1,11 +1,17 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
-const _Form = ({ createTask }) => {
+const _Form = ({ createTask, taskData, editTask, editingId, setEditingId }) => {
   const [task, setTask] = useState("");
 
-  function updateTask(event) {
+  const updateTask = useCallback((event) => {
     setTask(event.target.value);
-  }
+  }, []);
+
+  useEffect(() => {
+    if (taskData.task) {
+      setTask(taskData.task);
+    }
+  }, [taskData, updateTask]);
 
   function preventSubmit(event) {
     event.preventDefault();
@@ -16,6 +22,17 @@ const _Form = ({ createTask }) => {
       alert("Task can not be empty!");
     } else {
       createTask(task);
+      setTask("");
+    }
+  }
+  
+  function edit(task) {
+    if (!task) {
+      alert("Task can not be empty!");
+    } else {
+      editTask(editingId, task);
+      setEditingId(null)
+      setTask("");
     }
   }
 
@@ -29,13 +46,16 @@ const _Form = ({ createTask }) => {
             className="block h-14 px-26px pt-19px pb-18px w-full placeholder:text-black placeholder:opacity-40 rounded border-none focus:outline-none focus:border-transparent focus:ring-transparent"
             placeholder="Add task..."
             required
+            value={task}
             onChange={updateTask}
           />
 
           <button
             type="submit"
             className="text-white text-base rounded bg-violet px-6 py-2 hover:bg-violet-800"
-            onClick={() => submit(task)}
+            onClick={() =>
+              editingId ? edit(task) : submit(task)
+            }
           >
             Save
           </button>

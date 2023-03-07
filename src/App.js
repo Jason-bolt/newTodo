@@ -37,10 +37,25 @@ function App() {
     setNextId(nextId + 1);
   }
   
+  function editTask(id, updatedTask) {
+    const editTask = tasks.map((task) => {
+      if (task.id === id) {
+        return { ...task, task: updatedTask };
+      } else {
+        return task;
+      }
+    });
+    setTasks(editTask);
+  }
+
   function deleteTask(id) {
     setTasks(tasks.filter(task => task.id !== id))
   }
-
+  
+  // function deleteTask(id) {
+  //   setTasks(tasks.filter(task => task.id !== id))
+  // }
+  
   function increasePriority(id) {
     const currentTask = tasks.map((task) => {
       if (task.id === id) {
@@ -96,6 +111,7 @@ function App() {
               decreasePriority={decreasePriority}
               createTask={createTask}
               deleteTask={deleteTask}
+              editTask={editTask}
             />
           }
         />
