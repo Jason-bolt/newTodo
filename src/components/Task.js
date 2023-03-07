@@ -20,6 +20,7 @@ const Task = ({
 
   useEffect(() => {
     setEditStyle(editingId === task.id ? "text-green-500" : "text-edit")
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [editingId])
 
   useEffect(() => {
